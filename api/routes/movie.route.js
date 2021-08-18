@@ -39,7 +39,7 @@ router.put('/:id', verifyToken, async (req, res) => {
 })
 
 //DELETE MOVIE
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, async (req, res) => {
     if (req.user.isAdmin) {
         try {
             await Movie.findByIdAndDelete(req.params.id);

@@ -1,77 +1,83 @@
 import { DataGrid } from "@material-ui/data-grid"
 import "./productList.css"
 import { Link } from "react-router-dom";
-import { productRows } from "../../dummyData"
-import { useState } from "react"
-import  { DeleteOutline } from "@material-ui/icons"
+import { useContext, useEffect } from "react"
+import { DeleteOutline } from "@material-ui/icons"
+import { MovieContext} from "../../context/movieContext/MovieContext";
+import { getMovies, deleteMovie } from "../../context/movieContext/apiCalls";
 
 const ProductList = () => {
-    const [data, setData] = useState(productRows);
+    const {movies, dispatch} = useContext(MovieContext);
+
+    useEffect(() =>{
+      getMovies(dispatch);
+    },[dispatch])
 
     const handleDelete = (id) => {
-        const newData = data.filter(item => item.id !== id);
-
-        setData(newData);
+			deleteMovie(id, dispatch);
     }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 90 },
-        {
-          field: 'name',
-          headerName: 'Name',
-          width: 280,
-          renderCell:(params) => {
-              return (
-                  <div className="product-list__product">
-                      <img src={params.row.avatar} alt="" className="product-list__img" />
-                        {params.row.name}
-                  </div>
-              )
-          }
-        },
-        {
-          field: 'stock',
-          headerName: 'Stock',
-          width: 160,
-          editable: true,
-        },
-        {
-            field: 'status',
-            headerName: 'Status',
-            width: 160,
-            editable: true,
-        },
-        {
-          field: 'price',
-          headerName: 'Price',
-          sortable: false,
-          width: 160,
-        },
-        {
-            field: 'action',
-            headerName: 'Action',
-            width: 140,
-            renderCell: (params) => {
-                return (
-                    <div className="product-list__action">
-                        <Link to={"/product/" + params.row.id}>
-                            <button className="product-list__button--edit">Edit</button>
-                        </Link>
-                        <DeleteOutline onClick={() => handleDelete(params.row.id)} className="product-list__button--remove" />
-                    </div>
-                )
-            }
-        }
-      ];
+			{ field: '_id', headerName: 'ID', width: 200 },
+			{
+				field: 'movie',
+				headerName: 'Movie',
+				width: 280,
+				renderCell:(params) => {
+						return (
+								<div className="product-list__product">
+										<img src={params.row.img} alt="" className="product-list__img" />
+											{params.row.title}
+								</div>
+						)
+				}
+			},
+			{
+				field: 'genre',
+				headerName: 'Genre',
+				width: 120,
+			},
+			{
+				field: 'year',
+				headerName: 'Year',
+				width: 120,	
+			},
+			{
+				field: 'limit',
+				headerName: 'Limit',
+				width: 120,
+			},
+			{
+				field: 'isSeries',
+				headerName: 'IsSeries',
+				width: 120,
+			},
+			{
+					field: 'action',
+					headerName: 'Action',
+					width: 140,
+					renderCell: (params) => {
+							return (
+									<div className="product-list__action">
+											<Link to={{pathname: "/movies/" + params.row._id, movie: params.row}}>
+													<button className="product-list__button--edit">Edit</button>
+											</Link>
+											<DeleteOutline onClick={() => handleDelete(params.row._id)} className="product-list__button--remove" />
+									</div>
+							)
+					}
+			}
+		];
 
     return (
         <div className="product-list">
             <DataGrid
-                rows={data}
+                rows={movies}
                 columns={columns}
-                pageSize={9}
+                pageSize={movies.length}
                 checkboxSelection
                 disableSelectionOnClick
+                getRowId={(r) => r._id }
             />
         </div>
     )

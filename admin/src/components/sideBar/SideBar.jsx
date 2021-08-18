@@ -1,4 +1,4 @@
-import { AttachMoney, BarChart, ChatBubbleOutline, DynamicFeed, LineStyle, MailOutline, PermIdentity, Report, Storefront, Timeline, TrendingUp, WorkOutline } from "@material-ui/icons"
+import { AttachMoney, BarChart, ChatBubbleOutline, DynamicFeed, LineStyle, MailOutline, PermIdentity, Report, PlayCircleOutline, Timeline, TrendingUp, WorkOutline } from "@material-ui/icons"
 import { Link } from "react-router-dom"
 import "./sideBar.css"
 
@@ -32,10 +32,10 @@ const SideBar = () => {
                                 Users
                             </div>
                         </Link>
-                        <Link to="/products">
+                        <Link to="/movies">
                             <div className="side-bar__list--item">
-                                <Storefront className="side-bar__icon"/>
-                                Products
+                                <PlayCircleOutline className="side-bar__icon"/>
+                                Movies
                             </div>
                         </Link>
                         <div className="side-bar__list--item">
