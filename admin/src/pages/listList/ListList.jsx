@@ -3,54 +3,38 @@ import "./listList.css"
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react"
 import { DeleteOutline } from "@material-ui/icons"
-import { MovieContext} from "../../context/movieContext/MovieContext";
-import { getMovies, deleteMovie } from "../../context/movieContext/apiCalls";
+import { ListContext} from "../../context/listContext/ListContext";
+import { getLists, deleteList } from "../../context/listContext/apiCalls";
 
 const ListList = () => {
-    const {movies, dispatch} = useContext(MovieContext);
+    const {lists, dispatch} = useContext(ListContext);
 
     useEffect(() =>{
-      getMovies(dispatch);
+      getLists(dispatch);
     },[dispatch])
 
+	console.log(lists)
+
     const handleDelete = (id) => {
-			deleteMovie(id, dispatch);
+			deleteList(id, dispatch);
     }
 
     const columns = [
-			{ field: '_id', headerName: 'ID', width: 200 },
+			{ field: '_id', headerName: 'ID', width: 250 },
 			{
-				field: 'movie',
-				headerName: 'Movie',
-				width: 280,
-				renderCell:(params) => {
-						return (
-								<div className="product-list__product">
-										<img src={params.row.img} alt="" className="product-list__img" />
-											{params.row.title}
-								</div>
-						)
-				}
+				field: 'title',
+				headerName: 'Title',
+				width: 300,
 			},
 			{
 				field: 'genre',
 				headerName: 'Genre',
-				width: 120,
+				width: 150,	
 			},
 			{
-				field: 'year',
-				headerName: 'Year',
-				width: 120,	
-			},
-			{
-				field: 'limit',
-				headerName: 'Limit',
-				width: 120,
-			},
-			{
-				field: 'isSeries',
-				headerName: 'IsSeries',
-				width: 120,
+				field: 'type',
+				headerName: 'Type',
+				width: 150,
 			},
 			{
 					field: 'action',
@@ -59,7 +43,7 @@ const ListList = () => {
 					renderCell: (params) => {
 							return (
 									<div className="product-list__action">
-											<Link to={{pathname: "/movies/" + params.row._id, movie: params.row}}>
+											<Link to={{pathname: "/lists/" + params.row._id, list: params.row}}>
 													<button className="product-list__button--edit">Edit</button>
 											</Link>
 											<DeleteOutline onClick={() => handleDelete(params.row._id)} className="product-list__button--remove" />
@@ -72,9 +56,9 @@ const ListList = () => {
     return (
         <div className="product-list">
             <DataGrid
-                rows={movies}
+                rows={lists}
                 columns={columns}
-                pageSize={movies.length}
+                pageSize={lists.length}
                 checkboxSelection
                 disableSelectionOnClick
                 getRowId={(r) => r._id }

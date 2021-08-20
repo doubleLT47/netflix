@@ -14,7 +14,6 @@ const WidgetSm = () => {
                         token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMDAyMGYxZDY0MGI1Mzg4NDQwMjM1NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYyOTAzODg4NCwiZXhwIjoxNjI5NDcwODg0fQ.92JC8TnvL5jLFpHo9x0BxJdSkmlfho-caxLZjS9D-NE"
                     }
                 }) ;
-                console.log(res.data)
                 setNewUsers(res.data)
             }
             catch (err) {

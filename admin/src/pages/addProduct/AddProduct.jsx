@@ -1,5 +1,6 @@
 import "./addProduct.css"
 import { useState, useContext } from "react";
+import { useHistory } from "react-router-dom"
 import storage from "../../firebase.js"
 import { createMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
@@ -12,6 +13,7 @@ const AddProduct = () => {
 	const [trailer, setTrailer] = useState(null);
 	const [video, setVideo] = useState(null);
 	const [uploaded, setUploaded] = useState(0);
+	const history = useHistory();
 
 	const {dispatch} = useContext(MovieContext);
 
@@ -59,6 +61,7 @@ const AddProduct = () => {
 		e.preventDefault(); 
 
 		createMovie(movie, dispatch);
+		history.push("/movies")
 	}
 
 	return (

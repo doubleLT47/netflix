@@ -14,7 +14,7 @@ function App() {
             <Home />
           </Route>
           <Route path="/movies" exact>
-            <Home type="movies"/>
+            <Home type="movie"/>
           </Route>
           <Route path="/series" exact>
             <Home type="series"/>
