@@ -50,6 +50,15 @@ function App() {
               <Route path="/new-product" exact>
                 <AddProduct />
               </Route>
+              <Route path="/lists" exact>
+                <ProductList />
+              </Route>
+              <Route path="/lists/:listsId" exact>
+                <Product />
+              </Route>
+              <Route path="/new-product" exact>
+                <AddProduct />
+              </Route>
             </div>
           </>
         }
