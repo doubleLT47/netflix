@@ -13,9 +13,8 @@ const Home = ({type}) => {
         const getRandomLists = async () => {
             try {
                 const res = await axios.get(`lists${type ? "?type=" + type : ""}${genre ? '&genre=' + genre : ""}`, {
-                    headers: {
-                        token: "Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMDAyMGYxZDY0MGI1Mzg4NDQwMjM1NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYyOTQ3MTE1MCwiZXhwIjoxNjI5OTAzMTUwfQ.BJt2lZ1pJczqsjqs0yz73_DzvgrDpxzUClY0aGQhW2Y"
-                    }
+                    headers: 
+                        {token: "Bearer " + JSON.parse(localStorage.getItem('user')).accessToken}
                 });
                 
                 setLists(res.data)
