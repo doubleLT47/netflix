@@ -2,14 +2,19 @@ import "./navbar.scss"
 import { Search, Notifications, ArrowDropDown } from "@material-ui/icons"
 import { useState } from "react"
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext/AuthContext"
+import { logout } from "../../context/authContext/AuthActions"
 
 const Navbar = () => {
     const [isScroll, setIsScroll] = useState(false);
+    const {dispatch} = useContext(AuthContext);
 
     window.onscroll = () => {
         setIsScroll(window.pageYOffset === 0 ? false : true);
         return () => window.onscroll = null;
     }
+
     return (
         <div className={isScroll ? "navbar scrolled" : "navbar"}>
             <div className="container">
@@ -21,10 +26,10 @@ const Navbar = () => {
                         <span>Homepage</span>
                     </Link>
                     <Link to="/series">
-                        <span>Series</span>
+                        <span className="navbar__main-links">Series</span>
                     </Link>
                     <Link to="/movies">
-                        <span>Movies</span>
+                        <span className="navbar__main-links">Movies</span>
                     </Link>
                     <span>New and Popular</span>
                     <span>My List</span>
@@ -38,7 +43,7 @@ const Navbar = () => {
                         <ArrowDropDown className="icon"/>
                         <div className="options">
                             <span>Settings</span>
-                            <span>Logout</span>
+                            <span onClick={() => dispatch(logout())}>Logout</span>
                         </div>
                     </div>
                 </div>
