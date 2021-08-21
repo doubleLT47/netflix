@@ -11,7 +11,7 @@ const Featured = ({type, setGenre}) => {
             try {
                 const res = await axios.get(`/movies/find/random?type=${type}`, {
                     headers: {
-                        token: "Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMDAyMGYxZDY0MGI1Mzg4NDQwMjM1NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYyOTAzODg4NCwiZXhwIjoxNjI5NDcwODg0fQ.92JC8TnvL5jLFpHo9x0BxJdSkmlfho-caxLZjS9D-NE"
+                        token: "Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMDAyMGYxZDY0MGI1Mzg4NDQwMjM1NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYyOTQ3MTE1MCwiZXhwIjoxNjI5OTAzMTUwfQ.BJt2lZ1pJczqsjqs0yz73_DzvgrDpxzUClY0aGQhW2Y"
                     }
                 });
                 setContent(res.data[0]);
@@ -23,12 +23,13 @@ const Featured = ({type, setGenre}) => {
         
         getRandomContent();
     },[type])
+
     return (
         <div className="featured">
             {type && (
                 <div className="category">
                     <span>{type === "movie" ? "Movies" : "Series"}</span>
-                    <select name="genre" id="genre" onChan>
+                    <select name="genre" id="genre" onChange={e => setGenre(e.target.value)}>
                         <option >Genre</option>
                         <option value="adventure">Adventure</option>
                         <option value="comedy">Comedy</option>
