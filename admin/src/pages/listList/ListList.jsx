@@ -13,8 +13,6 @@ const ListList = () => {
       getLists(dispatch);
     },[dispatch])
 
-	console.log(lists)
-
     const handleDelete = (id) => {
 			deleteList(id, dispatch);
     }
@@ -55,7 +53,10 @@ const ListList = () => {
 
     return (
         <div className="product-list">
-            <DataGrid
+			<Link to="/new-list" >
+                    <button className="product-add--button">Create</button>
+                </Link>
+            <DataGrid className="product-list__table"
                 rows={lists}
                 columns={columns}
                 pageSize={lists.length}

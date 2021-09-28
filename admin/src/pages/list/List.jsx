@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+
 import './list.css';
 import { useLocation } from 'react-router-dom'
 
@@ -9,9 +9,6 @@ const List = () => {
         <div className="product">
              <div className="product__title-container">
                 <h1 className="product--title">Edit List</h1>
-                <Link to="/new-list" >
-                    <button className="product-add--button">Create</button>
-                </Link>
             </div>
             <div className="product-top">
                 <div className="product__right">

@@ -1,8 +1,13 @@
-import { Language, NotificationsNone, Settings } from "@material-ui/icons"
+import { Language, NotificationsNone, Settings, ArrowDropDown } from "@material-ui/icons"
 import "./topBar.css"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext/AuthContext";
+import { logout } from "../../context/authContext/AuthActions";
 
 const TopBar = () => {
+    const { user, dispatch } = useContext(AuthContext);
+
     return (
         <div className="top-bar">
             <div className="top-bar-wrapper">
@@ -24,9 +29,16 @@ const TopBar = () => {
                         <Settings />
                     </div>
                     <img 
-                    src="https://image-us.eva.vn/upload/1-2020/images/2020-03-20/3-1584713048-659-width800height700.jpg" 
+                    src={user.profilePicture || "https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"} 
                     alt="" 
                     className="top__avatar" />
+                    <div className="profile">
+                        <ArrowDropDown className="icon"/>
+                        <div className="options">
+                            <span className="profile_span">Settings</span>
+                            <span className="profile_span" onClick={() => dispatch(logout())}>Logout</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

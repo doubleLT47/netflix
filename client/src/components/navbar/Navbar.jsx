@@ -8,7 +8,7 @@ import { logout } from "../../context/authContext/AuthActions"
 
 const Navbar = () => {
     const [isScroll, setIsScroll] = useState(false);
-    const {dispatch} = useContext(AuthContext);
+    const {user, dispatch} = useContext(AuthContext);
 
     window.onscroll = () => {
         setIsScroll(window.pageYOffset === 0 ? false : true);
@@ -38,7 +38,7 @@ const Navbar = () => {
                     <Search className="icon"/>
                     <span>KID</span>
                     <Notifications className="icon"/>
-                    <img src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+                    <img src={user.profilePicture || "https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"} alt="" />
                     <div className="profile">
                         <ArrowDropDown className="icon"/>
                         <div className="options">

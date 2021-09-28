@@ -51,8 +51,32 @@
 }
 
 .top__avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.profile {
+    position: relative;
+}
+
+.options {
+    display: none;
+    border-radius: 5px;
+    border: 1px solid gray;
+    position: absolute;
+    background-color: #fff;
+    right: 0;
+}
+
+.profile_span {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.profile:hover > .options{
+    display: flex;
+    flex-direction: column;
+    position: absolute
 }

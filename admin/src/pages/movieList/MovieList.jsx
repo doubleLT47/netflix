@@ -1,12 +1,12 @@
 import { DataGrid } from "@material-ui/data-grid"
-import "./productList.css"
+import "./movieList.css"
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react"
 import { DeleteOutline } from "@material-ui/icons"
 import { MovieContext} from "../../context/movieContext/MovieContext";
 import { getMovies, deleteMovie } from "../../context/movieContext/apiCalls";
 
-const ProductList = () => {
+const MovieList = () => {
     const {movies, dispatch} = useContext(MovieContext);
 
     useEffect(() =>{
@@ -71,16 +71,19 @@ const ProductList = () => {
 
     return (
         <div className="product-list">
-            <DataGrid
-                rows={movies}
-                columns={columns}
-                pageSize={movies.length}
-                checkboxSelection
-                disableSelectionOnClick
-                getRowId={(r) => r._id }
-            />
+					<Link to="/new-product" >
+						<button className="product-add--button">Create</button>
+					</Link>
+					<DataGrid className="product-list__table"
+							rows={movies}
+							columns={columns}
+							pageSize={movies.length}
+							checkboxSelection
+							disableSelectionOnClick
+							getRowId={(r) => r._id }
+					/>
         </div>
     )
 }
 
-export default ProductList
+export default MovieList

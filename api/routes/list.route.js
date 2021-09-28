@@ -50,7 +50,6 @@ router.get("/", verifyToken, async (req, res) => {
                     { $sample: { size: 10} },
                     { $match: { type: typeQuery, genre: genreQuery } }
                 ]);
-                console.log(genreQuery)
             }
             else {
                 list = await List.aggregate([

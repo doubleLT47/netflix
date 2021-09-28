@@ -1,11 +1,16 @@
 .product-list {
     flex: 4;
     padding: 20px;
+    position: relative;
 }
 
 .product-list__product {
     display: flex;
     align-items: center;
+}
+
+.product-list__table {
+    margin-top: 50px;
 }
 
 .product-list__img {
@@ -14,6 +19,19 @@
     border-radius: 5px;
     object-fit: cover;
     margin-right: 10px;
+}
+
+.product-add--button {
+    width: 80px;
+    border: none;
+    padding: 5px;
+    background-color: teal;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    position: absolute;
+    right: 50px;
 }
 
 .product-list__action {

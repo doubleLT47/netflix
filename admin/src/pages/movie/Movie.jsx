@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import './product.css';
+
+import './movie.css';
 import { Publish } from '@material-ui/icons';
 import { useLocation } from 'react-router-dom'
 
@@ -10,9 +10,6 @@ const Product = () => {
         <div className="product">
              <div className="product__title-container">
                 <h1 className="product--title">Edit Movie</h1>
-                <Link to="/new-product" >
-                    <button className="product-add--button">Create</button>
-                </Link>
             </div>
             <div className="product-top">
                 <div className="product__right">

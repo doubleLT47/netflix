@@ -9,9 +9,9 @@ import UserList from "./pages/userList/UserList"
 import User from "./pages/user/User"
 import AddUser from "./pages/addUser/AddUser"
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
-import ProductList from "./pages/productList/ProductList"
-import Product from "./pages/product/Product"
-import AddProduct from "./pages/addProduct/AddProduct";
+import MovieList from "./pages/movieList/MovieList"
+import Movie from "./pages/movie/Movie"
+import AddMovie from "./pages/addMovie/AddMovie";
 import Login from "./pages/login/Login"
 import ListList from "./pages/listList/ListList"
 import { AuthContext } from "./context/authContext/AuthContext";
@@ -21,17 +21,18 @@ import AddList from "./pages/addList/AddList"
 
 function App() {
   const { user } = useContext(AuthContext);
+
   return (
     <Router className="App">
       <Switch>
         <Route path="/login" exact>
           { user ? <Redirect to="/" /> : <Login /> }
         </Route>
-        {user && 
+        {user ? 
           <>
-            <TopBar />
-            <div className="container" >
-              <SideBar />
+          <TopBar />
+          <div className="container" >
+            <SideBar />
               <Route path="/" exact>
                 <Home />
               </Route>
@@ -44,14 +45,14 @@ function App() {
               <Route path="/new-user" exact>
                 <AddUser />
               </Route>
-              <Route path="/movies" exact>
-                <ProductList />
+              <Route path="/movies" >
+                <MovieList />
               </Route>
               <Route path="/movies/:movieId" exact>
-                <Product />
+                <Movie />
               </Route>
-              <Route path="/new-product" exact>
-                <AddProduct />
+              <Route path="/new-movie" exact>
+                <AddMovie />
               </Route>
               <Route path="/lists" exact>
                 <ListList />
@@ -64,7 +65,7 @@ function App() {
               </Route>
             </div>
           </>
-        }
+        : <Redirect to="/login"/>}
       </Switch>
     </Router>
   );

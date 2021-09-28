@@ -15,9 +15,7 @@ const Home = () => {
         const getStats = async () => {
         try {
             const res = await axios.get(`/users/stats`, {
-            headers: {
-                token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMDAyMGYxZDY0MGI1Mzg4NDQwMjM1NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYyOTAzODg4NCwiZXhwIjoxNjI5NDcwODg0fQ.92JC8TnvL5jLFpHo9x0BxJdSkmlfho-caxLZjS9D-NE"
-            }
+                headers: {token: "Bearer " + JSON.parse(localStorage.getItem('user')).accessToken}
             });
             const statsLists = res.data.sort(function(a, b) {
                 return a._id - b._id;

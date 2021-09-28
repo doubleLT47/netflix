@@ -1,27 +1,43 @@
 import "./userList.css"
 import { DataGrid } from '@material-ui/data-grid';
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 
 const UserList = () => {
-    const [data,setData] = useState(userRows);
-    const handleDelete = (id) => {
-        const newData = data.filter(item => item.id !== id);
+    const [users,setUsers] = useState([]);
 
-        setData(newData);
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                const res = await axios.get('/users', {
+                    headers: {token: "Bearer " + JSON.parse(localStorage.getItem('user')).accessToken}
+                }) ;
+                setUsers(res.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        };
+        getUsers();
+    },[]);
+
+    console.log(users)
+
+    const handleDelete = (id) => {
+        
     }
     const columns = [
-        { field: 'id', headerName: 'ID', width: 90 },
+        { field: '_id', headerName: 'ID', width: 200 },
         {
           field: 'username',
           headerName: 'Username',
-          width: 280,
+          width: 200,
           renderCell:(params) => {
               return (
                   <div className="user-list__user">
-                      <img src={params.row.avatar} alt="" className="user-list__img" />
+                      <img src={params.row.profilePic || "https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"} alt="" className="user-list__img" />
                         {params.row.username}
                   </div>
               )
@@ -30,21 +46,18 @@ const UserList = () => {
         {
           field: 'email',
           headerName: 'Email',
-          width: 280,
-          editable: true,
+          width: 200,
         },
         {
-            field: 'status',
-            headerName: 'Status',
-            width: 120,
-            editable: true,
-        },
-        {
-          field: 'transactions',
-          headerName: 'Transactions',
-          sortable: false,
-          width: 160,
-        },
+            field: 'password',
+            headerName: 'Password',
+            width: 280,
+          },
+          {
+            field: 'isAdmin',
+            headerName: 'IsAdmin',
+            width: 130,
+          },
         {
             field: 'action',
             headerName: 'Action',
@@ -62,15 +75,19 @@ const UserList = () => {
         }
       ];
     return (
-        <div className="user-list">
-            <DataGrid
-                rows={data}
-                columns={columns}
-                pageSize={9}
-                checkboxSelection
-                disableSelectionOnClick
-            />
-        </div>
+			<div className="user-list">
+				<Link to="/new-user" >
+						<button className="user-add--button">Create</button>
+				</Link>
+				<DataGrid className="user-list__table"
+						rows={users}
+						columns={columns}
+						pageSize={users.length}
+						checkboxSelection
+						disableSelectionOnClick
+                        getRowId={(r) => r._id }
+				/>
+			</div>
     )
 }
 

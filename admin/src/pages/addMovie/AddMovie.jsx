@@ -1,11 +1,11 @@
-import "./addProduct.css"
+import "./addMovie.css"
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom"
 import storage from "../../firebase.js"
 import { createMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 
-const AddProduct = () => {
+const AddMovie = () => {
 	const [movie, setMovie] = useState(null);
 	const [img, setImg] = useState(null);
 	const [imgTitle, setImgTitle] = useState(null);
@@ -125,4 +125,4 @@ const AddProduct = () => {
 	)
 }
 
-export default AddProduct
+export default AddMovie

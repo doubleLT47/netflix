@@ -18,8 +18,8 @@
 .widget-sm__list--item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin: 20px 0;
+    position: relative;
 }
 
 .widget-sm-img {
@@ -27,6 +27,7 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    margin-right: 10px;
 }
 
 .widget-sm-user {
@@ -51,6 +52,8 @@
     background-color: #eeeef7;
     color: #555;
     cursor: pointer;
+    position: absolute;
+    right: 0;
 }
 
 .widget-sm__icon {
