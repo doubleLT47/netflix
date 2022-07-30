@@ -6,6 +6,7 @@ import { DeleteOutline } from "@material-ui/icons"
 import { ListContext} from "../../context/listContext/ListContext";
 import { getLists, deleteList } from "../../context/listContext/apiCalls";
 
+
 const ListList = () => {
     const {lists, dispatch} = useContext(ListContext);
 
@@ -50,6 +51,38 @@ const ListList = () => {
 					}
 			}
 		];
+	// 	{ field: '_id', headerName: 'ID', width: 250 },
+    // {
+    //   field: 'title',
+    //   headerName: 'Title',
+    //   width: 300,
+    // },
+    // {
+    //   field: 'genre',
+    //   headerName: 'Genre',
+    //   width: 150,	
+    // },
+    // {
+    //   field: 'type',
+    //   headerName: 'Type',
+    //   width: 150,
+    // },
+    // {
+        // field: 'action',
+        // headerName: 'Action',
+        // width: 140,
+        // renderCell: (params) => {
+        //     return (
+        //         <Box sx={{ alignItems: 'center' }}>
+        //             <Link to={{pathname: "/lists/" + params.row._id, list: params.row}}>
+        //             <Button variant="contained" specialBg="red" startIcon={<Edit />}></Button>
+        //             </Link>
+        //             <Button variant="contained" onClick={() => console.log("delete")}specialBg="red" startIcon={<DeleteOutline />}></Button>
+
+        //         </Box>
+        //     )
+        // }
+    // }
 
     return (
         <div className="product-list">
