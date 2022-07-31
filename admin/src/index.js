@@ -1,20 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { AuthContextProvider } from './context/authContext/AuthContext';
-import { MovieContextProvider } from './context/movieContext/MovieContext';
-import { ListContextProvider } from './context/listContext/ListContext';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { Provider } from "react-redux";
+import rootSaga from "../store/sagas";
+import store, { sagaMiddleware } from "../store";
+import { BrowserRouter } from "react-router-dom";
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <MovieContextProvider>
-        <ListContextProvider>
-          <App />
-        </ListContextProvider>
-      </MovieContextProvider>
-    </AuthContextProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+         <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
